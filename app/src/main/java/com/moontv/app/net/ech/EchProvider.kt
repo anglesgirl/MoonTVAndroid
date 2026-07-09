@@ -78,7 +78,7 @@ object EchProvider {
      * 探测并初始化 ECH 环境。整个流程对失败容错：任何异常都只导致 ECH 不可用，
      * 不会抛出影响 App 启动。
      */
-    private fun initialize() {
+    fun initialize() {
         try {
             // 1. 反射加载 Conscrypt 主类
             val clazz = runCatching { Class.forName(CONSCRYPT_CLASS_NAME) }.getOrNull()
