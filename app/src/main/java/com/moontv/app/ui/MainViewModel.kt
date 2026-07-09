@@ -82,10 +82,21 @@ class MainViewModel(
         }
     }
 
-    /** 获取视频详情 */
+    /**
+     * 获取视频详情
+     *
+     * 支持两种模式：
+     * - 普通：source 是采集源 key，id 是 vod_id
+     * - 跨源搜索：source == "tmdb_search"，id 是标题，用标题去苹果 CMS 源搜索第一个可播放结果
+     */
     suspend fun detail(source: String, id: String): SearchResult? {
         return runCatching {
-            VideoRepository(config, echEnabled).detail(source, id)
+            val repo = VideoRepository(config, echEnabled)
+            if (source == "tmdb_search") {
+                repo.searchFirstPlayable(id)
+            } else {
+                repo.detail(source, id)
+            }
         }.getOrNull()
     }
 }

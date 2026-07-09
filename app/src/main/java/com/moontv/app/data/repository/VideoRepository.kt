@@ -43,6 +43,24 @@ class VideoRepository(
         return runCatching { macCmsApi.detail(site, id) }.getOrNull()
     }
 
+    /**
+     * 用标题跨源搜索，返回第一个有播放地址的结果
+     * 用于从 TMDB 元数据桥接到苹果 CMS 播放源
+     */
+    suspend fun searchFirstPlayable(title: String): SearchResult? {
+        val results = searchAll(title)
+        return results.firstOrNull { it.episodes.isNotEmpty() }
+    }
+
+    /**
+     * 用标题跨源搜索，返回所有有播放地址的结果
+     * 用于详情页展示多个可用播放源
+     */
+    suspend fun searchAllPlayable(title: String): List<SearchResult> {
+        val results = searchAll(title)
+        return results.filter { it.episodes.isNotEmpty() }
+    }
+
     /** TMDB 搜索（元数据补充） */
     suspend fun searchMetadata(query: String): List<TmdbItem> =
         runCatching { tmdbApi.search(query) }.getOrDefault(emptyList())

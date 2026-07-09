@@ -152,8 +152,8 @@ fun HomeScreen(
                                 onNavigateToDetail(result.source, result.id)
                             },
                             onTmdbClick = { item ->
-                                // TMDB 项无 CMS 源映射，点击以其标题触发聚合搜索
-                                viewModel.search(item.displayTitle)
+                                // TMDB 无播放地址，用标题导航到详情页触发跨源搜索
+                                onNavigateToDetail("tmdb_search", item.displayTitle)
                             }
                         )
                     }

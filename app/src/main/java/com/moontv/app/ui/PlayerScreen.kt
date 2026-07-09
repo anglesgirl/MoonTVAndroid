@@ -120,8 +120,13 @@ fun PlayerScreen(
                 color = Color.White
             )
         } else if (failed || episodes.isNullOrEmpty()) {
+            val hint = if (source == "tmdb_search") {
+                "无法获取播放地址\n\n未在采集源中找到可播放内容，请确认已配置苹果 CMS 采集源"
+            } else {
+                "无法获取播放地址，请返回重试"
+            }
             Text(
-                text = "无法获取播放地址，请返回重试",
+                text = hint,
                 color = Color.White,
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier

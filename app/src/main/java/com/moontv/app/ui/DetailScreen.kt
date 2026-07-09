@@ -103,8 +103,13 @@ fun DetailScreen(
                     CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                 }
                 failed || detail == null -> {
+                    val hint = if (source == "tmdb_search") {
+                        "未找到可播放的采集源\n\n请确认：\n1. 已在设置页配置苹果 CMS 采集源\n2. 该影片在采集源中可搜到"
+                    } else {
+                        "加载详情失败，请检查采集源配置或稍后重试"
+                    }
                     Text(
-                        text = "加载详情失败，请检查采集源配置或稍后重试",
+                        text = hint,
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.error,
                         modifier = Modifier
