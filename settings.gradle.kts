@@ -12,10 +12,10 @@ dependencyResolutionManagement {
         mavenCentral()
         // 本地 AAR 仓库（用于引入 DEfO ECH 版本的 Conscrypt）
         flatDir {
-            dirs 'app/libs'
+            dirs("app/libs")
         }
     }
 }
 
 rootProject.name = "MoonTVAndroid"
-include ':app'
+include(":app")
