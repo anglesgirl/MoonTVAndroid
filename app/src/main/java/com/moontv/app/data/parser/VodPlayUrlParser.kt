@@ -22,7 +22,7 @@ object VodPlayUrlParser {
      * 选择分集最多的播放组
      */
     fun parse(vodPlayUrl: String): Pair<List<String>, List<String>> {
-        if (vodPlayUrl.isBlank()) return emptyList() to emptyList()
+        if (vodPlayUrl.isBlank()) return emptyList<String>() to emptyList<String>()
 
         var bestTitles: List<String> = emptyList()
         var bestEpisodes: List<String> = emptyList()

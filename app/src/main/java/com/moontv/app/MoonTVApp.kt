@@ -16,6 +16,6 @@ class MoonTVApp : Application() {
     override fun onCreate() {
         super.onCreate()
         // 初始化 ECH：尝试加载 DEfO fork，失败则降级标准 TLS
-        EchProvider.init()
+        EchProvider.initialize()
     }
 }

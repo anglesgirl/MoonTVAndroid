@@ -76,10 +76,11 @@ dependencies {
     // 图片加载
     implementation("io.coil-kt:coil-compose:2.6.0")
 
-    // Media3 (ExoPlayer) + HLS 播放
+    // Media3 (ExoPlayer) + HLS 播放 + OkHttp 数据源
     implementation("androidx.media3:media3-exoplayer:1.4.0")
     implementation("androidx.media3:media3-exoplayer-hls:1.4.0")
     implementation("androidx.media3:media3-ui:1.4.0")
+    implementation("androidx.media3:media3-datasource-okhttp:1.4.0")
 
     // Conscrypt：为低版本设备提供 TLS1.3，并作为 ECH 的底层宿主
     // 注意：开启 ECH 需替换为 DEfO fork 编译的 AAR（见 net/ech/README）

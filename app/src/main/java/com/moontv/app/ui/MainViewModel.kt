@@ -7,6 +7,8 @@ import com.moontv.app.data.model.SearchResult
 import com.moontv.app.data.model.TmdbItem
 import com.moontv.app.data.repository.VideoRepository
 import com.moontv.app.net.ech.EchProvider
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -54,10 +56,10 @@ class MainViewModel(
                 val repo = VideoRepository(config, echEnabled)
                 // 并发：苹果CMS多源搜索 + TMDB搜索
                 kotlinx.coroutines.coroutineScope {
-                    val cmsDeferred = kotlinx.coroutines.async {
+                    val cmsDeferred = async {
                         runCatching { repo.searchAll(query) }.getOrDefault(emptyList())
                     }
-                    val tmdbDeferred = kotlinx.coroutines.async {
+                    val tmdbDeferred = async {
                         runCatching { repo.searchMetadata(query) }.getOrDefault(emptyList())
                     }
                     _searchResults.value = cmsDeferred.await()
